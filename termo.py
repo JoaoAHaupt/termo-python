@@ -5,33 +5,43 @@ init()
 palavras = ['certo', 'feira', 'jovem', 'troca', 'amigo', 'bemol', 'folia', 'grava', 'limpo', 'noite']
 palavra = random.choice(palavras)
 
-teste = ["_" for _ in palavra]
-tentativa3 = []
+tentativas_anteriores = []
 
+num_tentativas = 0
+
+print('TERMO')
 while True:
     tentativa = input().strip().lower()
+    if len(tentativa) != 5:
+        for i in range(5):
+            tentativa = tentativa + tentativa[len(tentativa) - 1]
 
-    tentativa2 = [" " for _ in palavra]
+    validacao = [" " for _ in palavra]
 
-    pontos = 0
+
 
     for i, letra in enumerate(palavra):
         if tentativa[i] == palavra[i]:
-            tentativa2[i] = Fore.GREEN + tentativa[i]
-            pontos += 1
+            validacao[i] = Fore.GREEN + tentativa[i]
         elif tentativa[i] in palavra:
-            tentativa2[i] = Fore.YELLOW + tentativa[i]
+            validacao[i] = Fore.YELLOW + tentativa[i]
         else:
-            tentativa2[i] = Fore.RED + tentativa[i]
+            validacao[i] = Fore.RED + tentativa[i]
 
 
-    tentativa3.append(tentativa2)
+    tentativas_anteriores.append(validacao)
     print('\n' * 100)
-    for tentativas in tentativa3:
+    for tentativas in tentativas_anteriores:
         print(''.join(tentativas))
 
-    if pontos == 4:
-        print('Ganhou')
+    if palavra == tentativa:
+        print('Ganhou!')
+        break
+
+    num_tentativas += 1
+
+    if num_tentativas == 5:
+        print('PERDEU!')
         break
 
     print('\n')
