@@ -10,6 +10,7 @@ tentativas_anteriores = []
 num_tentativas = 0
 
 print('TERMO')
+
 while True:
     tentativa = input().strip().lower()
     if len(tentativa) != 5:
@@ -41,7 +42,8 @@ while True:
     num_tentativas += 1
 
     if num_tentativas == 5:
-        print('PERDEU!')
+        print(Fore.RED + 'PERDEU!')
+        print('Palavra correta ' + palavra)
         break
 
     print('\n')
